@@ -1,6 +1,5 @@
 const contacts = require('../models/contacts');
-const {nanoid} = require('nanoid')
-const {HttpError, ctrlWrapper, addValid, updateValid} = require('../helpers');
+const {HttpError, ctrlWrapper} = require('../helpers');
 
 
 
@@ -19,9 +18,7 @@ const getAll = async (__, res) => {
   };
   
   const addNew = async (req, res) => {
-    addValid(req.body);
-  const newContact = { id: nanoid(), ...req.body };
-  const result = await contacts.addContact(newContact);
+    const result = await contacts.addContact(req.body);
       return res.status(201).json(result);
   };
   
@@ -35,11 +32,10 @@ const getAll = async (__, res) => {
   };
   
   const updateById = async (req, res) => {
-    updateValid(req.body);
     const { contactId } = req.params;
     const result = await contacts.updateContact(contactId, req.body);
       if (!result) {
-        throw HttpError(404, "Not found").end();
+        throw HttpError(404, "Not found");
     }
       return res.json(result);
   };
