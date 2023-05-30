@@ -1,20 +1,26 @@
-const { addSchema, updateSchema } = require('./schemas')
 const HttpError = require('./HttpError');
 
 
-const addValid = (body) => {
-  const { error } = addSchema.validate(body);
+const addValid = schema => {
+  const func = (req, res, next) => {
+  const { error } = schema.validate(req.body);
   if (error) {
     throw HttpError(400, "missing required name field");
   }
+  next();
+};
+return func;
 };
 
-const updateValid = (body) => {
-  const bodyLength = Object.keys(body).length;
-  const { error } = updateSchema.validate(body);
-  if (error || !bodyLength) {
+const updateValid = schema => {
+  const func = (req, res, next) => {
+  const { error } = schema.validate(req.body);
+  if (error) {
     throw HttpError(400, "missing fields");
   }
+  next();
+};
+return func;
 };
 
 module.exports = {
