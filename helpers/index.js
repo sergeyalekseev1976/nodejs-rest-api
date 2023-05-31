@@ -1,6 +1,7 @@
 const HttpError = require('./HttpError');
 const ctrlWrapper = require('./ctrlWrapper');
-const {addValid, updateValid} = require('./validate');
-const { addSchema, updateSchema } = require('./schemas');
+const {addValid, updateValid, updateFavoriteValid} = require('./validate');
+const mongooseError = require('./mongooseError');
+const isValidId = require('./isValidId')
 
-module.exports = {HttpError, ctrlWrapper, addValid, updateValid, addSchema, updateSchema};
+module.exports = {HttpError, ctrlWrapper, addValid, updateValid, mongooseError, updateFavoriteValid, isValidId};
