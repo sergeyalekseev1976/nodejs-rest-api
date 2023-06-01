@@ -1,7 +1,7 @@
 const express = require('express');
 const ctrl = require('../../controllers/contacts');
 const { addValid, updateValid, updateFavoriteValid, isValidId } = require('../../helpers');
-const {addSchema, updateSchema, updateFavoriteSchema} = require('../../models/contact')
+const {addSchema, updateSchema, updateFavoriteSchema} = require('../../models')
 const router = express.Router()
 
 router.get("/", ctrl.getAll);
