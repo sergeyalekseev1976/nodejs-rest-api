@@ -22,8 +22,14 @@ const updateValid = schema => {
 };
 return func;
 };
-
-module.exports = {
-  addValid,
-  updateValid,
+const updateFavoriteValid = schema => {
+  const func = (req, res, next) => {
+  const { error } = schema.validate(req.body);
+  if (error) {
+    throw HttpError(400, "missing field favorite");
+  }
+  next();
 };
+return func;
+};
+module.exports = { addValid, updateValid, updateFavoriteValid};
