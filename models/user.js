@@ -21,7 +21,15 @@ const userSchema = new Schema({
   }, {versionKey: false, timestamps: true}
   );
 
+const registerSchema = Joi.object({
+    password: Joi.string().min(6).required(),
+    email: Joi.string().email().required()
+});
+const subSchema = Joi.object({
+    subscription: Joi.string().required()
+})
+
   userSchema.post('save', mongooseError);
   const User = model('user', userSchema);
 
-  module.exports = {User};
+  module.exports = {User, registerSchema, subSchema};
