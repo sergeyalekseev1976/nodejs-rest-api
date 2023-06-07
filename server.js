@@ -1,17 +1,17 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const app = require('./app')
+const app = require("./app");
 
-const {DB_HOST, PORT} = process.env;
+const { DB_HOST, PORT } = process.env;
 
-mongoose.connect(DB_HOST)
-.then(() =>{
-app.listen(PORT, () => {
-  console.log("Database connection successful")
-})
-})
-.catch(error => {
-  console.log(error.massage);
-  process.exit(1);
-})
-
+mongoose
+  .connect(DB_HOST)
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log("Database connection successful");
+    });
+  })
+  .catch((error) => {
+    console.log(error.massage);
+    process.exit(1);
+  });

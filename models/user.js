@@ -1,35 +1,37 @@
-const {Schema, model} = require('mongoose');
-const Joi = require('joi');
-const mongooseError = require('../helpers');
+const { Schema, model } = require("mongoose");
+const Joi = require("joi");
+// const { mongooseError } = require("../helpers");
 
-const userSchema = new Schema({
+const userSchema = new Schema(
+  {
     password: {
       type: String,
-      required: [true, 'Set password for user'],
+      required: [true, "Set password for user"],
     },
     email: {
       type: String,
-      required: [true, 'Email is required'],
+      required: [true, "Email is required"],
       unique: true,
     },
     subscription: {
       type: String,
       enum: ["starter", "pro", "business"],
-      default: "starter"
+      default: "starter",
     },
-    token: String
-  }, {versionKey: false, timestamps: true}
-  );
+    token: String,
+  },
+  { versionKey: false, timestamps: true }
+);
 
-const registerSchema = Joi.object({
-    password: Joi.string().min(6).required(),
-    email: Joi.string().email().required()
+const authSchema = Joi.object({
+  password: Joi.string().min(6).required(),
+  email: Joi.string().email().required(),
 });
 const subSchema = Joi.object({
-    subscription: Joi.string().required()
-})
+  subscription: Joi.string().required(),
+});
 
-  userSchema.post('save', mongooseError);
-  const User = model('user', userSchema);
+// userSchema.post("save", mongooseError);
+const User = model("user", userSchema);
 
-  module.exports = {User, registerSchema, subSchema};
+module.exports = { User, authSchema, subSchema };

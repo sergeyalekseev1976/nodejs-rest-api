@@ -1,35 +1,34 @@
-const HttpError = require('./HttpError');
+const HttpError = require("./HttpError");
 
+const addValid = (schema) => {
+  const func = (req, res, next) => {
+    const { error } = schema.validate(req.body);
+    if (error) {
+      throw HttpError(400, "missing required name field");
+    }
+    next();
+  };
+  return func;
+};
 
-const addValid = schema => {
+const updateValid = (schema) => {
   const func = (req, res, next) => {
-  const { error } = schema.validate(req.body);
-  if (error) {
-    throw HttpError(400, "missing required name field");
-  }
-  next();
+    const { error } = schema.validate(req.body);
+    if (error) {
+      throw HttpError(400, "missing fields");
+    }
+    next();
+  };
+  return func;
 };
-return func;
-};
-
-const updateValid = schema => {
+const updateFavoriteValid = (schema) => {
   const func = (req, res, next) => {
-  const { error } = schema.validate(req.body);
-  if (error) {
-    throw HttpError(400, "missing fields");
-  }
-  next();
+    const { error } = schema.validate(req.body);
+    if (error) {
+      throw HttpError(400, "missing field favorite");
+    }
+    next();
+  };
+  return func;
 };
-return func;
-};
-const updateFavoriteValid = schema => {
-  const func = (req, res, next) => {
-  const { error } = schema.validate(req.body);
-  if (error) {
-    throw HttpError(400, "missing field favorite");
-  }
-  next();
-};
-return func;
-};
-module.exports = { addValid, updateValid, updateFavoriteValid};
+module.exports = { addValid, updateValid, updateFavoriteValid };
