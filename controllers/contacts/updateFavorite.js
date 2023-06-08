@@ -1,14 +1,20 @@
-const {Contact} = require('../../models');
-const {HttpError} = require('../../helpers');
+const { Contact } = require("../../models");
+const { HttpError } = require("../../helpers");
 
-  const updateFavorite = async (req, res) => {
-    const { contactId } = req.params;
-    const result = await Contact.findByIdAndUpdate(contactId, req.body, {
-      new: true, });
-      if (!result) {
-      throw HttpError(404, "Not found");
+const updateFavorite = async (req, res) => {
+  const { _id: owner } = req.user;
+  const { contactId } = req.params;
+  const result = await Contact.findByIdAndUpdate(
+    { owner, _id: contactId },
+    req.body,
+    {
+      new: true,
     }
-  
-    return res.json(result);
-  };
-  module.exports = updateFavorite;
+  );
+  if (!result) {
+    throw HttpError(404, "Not found");
+  }
+
+  return res.json(result);
+};
+module.exports = updateFavorite;
