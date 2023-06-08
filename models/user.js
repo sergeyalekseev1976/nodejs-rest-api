@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
-// const { mongooseError } = require("../helpers");
+const mongooseError = require("../middlewares/mongooseError");
 
 const userSchema = new Schema(
   {
@@ -31,7 +31,7 @@ const subSchema = Joi.object({
   subscription: Joi.string().required(),
 });
 
-// userSchema.post("save", mongooseError);
+userSchema.post("save", mongooseError);
 const User = model("user", userSchema);
 
 module.exports = { User, authSchema, subSchema };

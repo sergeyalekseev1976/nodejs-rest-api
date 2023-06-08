@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-// const { mongooseError } = require("../helpers");
+const mongooseError = require("../middlewares/mongooseError");
 const Joi = require("joi");
 
 const contactSchema = new Schema(
@@ -26,7 +26,7 @@ const contactSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-// contactSchema.post("save", mongooseError);
+contactSchema.post("save", mongooseError);
 
 const addSchema = Joi.object({
   name: Joi.string().min(3).required(),

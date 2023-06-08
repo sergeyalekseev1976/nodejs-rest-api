@@ -6,8 +6,8 @@ const {
   updateValid,
   updateFavoriteValid,
   isValidId,
-  authenticate,
 } = require("../../helpers");
+const authenticate = require("../../middlewares/authenticate");
 const {
   addSchema,
   updateSchema,
