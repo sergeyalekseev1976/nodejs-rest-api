@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
-const mongooseError = require("../middlewares/mongooseError");
+const { mongooseError } = require("../middlewares");
 
 const userSchema = new Schema(
   {
@@ -19,6 +19,7 @@ const userSchema = new Schema(
       default: "starter",
     },
     token: String,
+    avatarURL: String,
   },
   { versionKey: false, timestamps: true }
 );
