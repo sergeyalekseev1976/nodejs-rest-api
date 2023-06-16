@@ -4,7 +4,7 @@ const {
   updateFavoriteSchema,
   Contact,
 } = require("./contact");
-const { User, authSchema, subSchema } = require("./user");
+const { User, authSchema, subSchema, emailSchema } = require("./user");
 
 module.exports = {
   addSchema,
@@ -14,4 +14,5 @@ module.exports = {
   User,
   authSchema,
   subSchema,
+  emailSchema
 };
