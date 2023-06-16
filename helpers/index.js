@@ -1,7 +1,7 @@
 const HttpError = require("./HttpError");
 const ctrlWrapper = require("./ctrlWrapper");
 const { addValid, updateValid, updateFavoriteValid } = require("./validate");
-// const mongooseError = require("./mongooseError");
+const sendEmail = require("./sendEmail");
 const isValidId = require("./isValidId");
 const validateBody = require("./validateBody");
 const authenticate = require("../middlewares/authenticate");
@@ -11,7 +11,7 @@ module.exports = {
   ctrlWrapper,
   addValid,
   updateValid,
-  // mongooseError,
+  sendEmail,
   updateFavoriteValid,
   isValidId,
   validateBody,
