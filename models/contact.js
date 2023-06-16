@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const mongooseError = require("../middlewares/mongooseError");
+const { mongooseError } = require("../middlewares");
 const Joi = require("joi");
 
 const contactSchema = new Schema(
